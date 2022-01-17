@@ -13,7 +13,7 @@ const UserList = () => {
 
   const deleteUserData = async (id) => {
     console.log(id);
-    const deleteUser = users.filter((user) => user.id != id);
+    const deleteUser = users.filter((user) => user._id != id);
     setUsers(deleteUser);
     // getAllUsers();
   };
@@ -21,9 +21,7 @@ const UserList = () => {
   const getAllUsers = async () => {
     setLoading(true);
     try {
-      let response = await axios.get(
-        "https://jsonplaceholder.typicode.com/users"
-      );
+      let response = await axios.get("http://localhost:5000/all-user");
       setUsers(response.data);
       setLoading(false);
     } catch (err) {
@@ -63,15 +61,15 @@ const UserList = () => {
             </th>
           </tr>
           {users.map((user, index) => (
-            <tr key={user.id} className="text-lg text-teal-900">
+            <tr key={user._id} className="text-lg text-teal-900">
               <td className="border-2 pl-2">
                 <span className="text-xl">{index + 1}</span>
               </td>
               <td className="border-2 pr-6 pl-2">
-                <span className="text-xl">{user.name}</span>
+                <span className="text-xl">{user.fullname}</span>
               </td>
               <td className="border-2 pr-6 pl-2">
-                <span className="text-xl">{user.username}</span>
+                <span className="text-xl">{user.userName}</span>
               </td>
               <td className="border-2 pr-6 pl-2">
                 <span className="text-xl">{user.email}</span>
@@ -84,11 +82,11 @@ const UserList = () => {
                   className="px-4 py-2 bg-emerald-400 hover:text-rose-50 rounded"
                   to={`/edit/${user._id}`}
                 >
-                  <Link href={`/edit-user/${user.id}`}>Edit User</Link>
+                  <Link href={`/edit-user/${user._id}`}>Edit User</Link>
                 </button>{" "}
                 <button
                   className="px-4 py-2 bg-rose-500 hover:text-rose-50 rounded"
-                  onClick={() => deleteUserData(user.id)}
+                  onClick={() => deleteUserData(user._id)}
                 >
                   Delete
                 </button>{" "}
