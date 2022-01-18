@@ -4,33 +4,30 @@ import Link from "next/link";
 import ReactLoading from "react-loading";
 
 const UserList = () => {
-  const [users, setUsers] = useState([]);
+  const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    getAllUsers();
+    getAllBooks();
   }, []);
 
-  const deleteUserData = async (id) => {
+  const deleteBookData = async (id) => {
     console.log(id);
-    const deleteUser = users.filter((user) => user.id != id);
-    setUsers(deleteUser);
-    // getAllUsers();
+    const deleteBook = books.filter((book) => book._id != id);
+    setBooks(deleteBook);
   };
 
-  const getAllUsers = async () => {
+  const getAllBooks = async () => {
     setLoading(true);
     try {
-      let response = await axios.get(
-        "https://jsonplaceholder.typicode.com/users"
-      );
-      setUsers(response.data);
+      let response = await axios.get("http://localhost:5000/all-book");
+      setBooks(response.data);
       setLoading(false);
     } catch (err) {
       console.log("Error: ", err);
     }
   };
-  console.log(users);
+  console.log(books);
   return loading == true ? (
     <div className="w-full">
       <div className="flex justify-center">
@@ -49,42 +46,42 @@ const UserList = () => {
               <div>Name</div>
             </th>
             <th className="text-left border-2 pl-2">
-              <div>Username</div>
+              <div>Author</div>
             </th>
             <th className="text-left border-2 pl-2">
-              <div>Email</div>
+              <div>Publication</div>
             </th>
             <th className="text-left border-2 pl-2">
-              <div>Phone</div>
+              <div>Copies Left</div>
             </th>
             <th className="text-center border-2 pl-2 text-rose-500">
               <div>Operation</div>
             </th>
           </tr>
-          {users.map((user, index) => (
-            <tr key={user.id} className="text-lg text-teal-900">
+          {books.map((book, index) => (
+            <tr key={book._id} className="text-lg text-teal-900">
               <td className="border-2 pl-2">
                 <span className="text-xl">{index + 1}</span>
               </td>
               <td className="border-2 pr-6 pl-2">
-                <span className="text-xl">{user.name}</span>
+                <span className="text-xl">{book.name}</span>
               </td>
               <td className="border-2 pr-6 pl-2">
-                <span className="text-xl">{user.username}</span>
+                <span className="text-xl">{book.author}</span>
               </td>
               <td className="border-2 pr-6 pl-2">
-                <span className="text-xl">{user.email}</span>
+                <span className="text-xl">{book.publication}</span>
               </td>
               <td className="border-2 pr-6 pl-2">
-                <span className="text-xl">{user.phone}</span>
+                <span className="text-xl">{book.copies}</span>
               </td>
               <td className="border-2">
                 <button className="px-4 py-2 bg-emerald-400 hover:text-rose-50 rounded">
-                  <Link href={`/edit-book/${user.id}`}>Edit User</Link>
+                  <Link href={`/edit-book/${book.id}`}>Edit Book</Link>
                 </button>{" "}
                 <button
                   className="px-4 py-2 bg-rose-500 hover:text-rose-50 rounded"
-                  onClick={() => deleteUserData(user.id)}
+                  onClick={() => deleteBookData(book._id)}
                 >
                   Delete
                 </button>{" "}

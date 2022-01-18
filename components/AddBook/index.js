@@ -1,15 +1,16 @@
+import axios from "axios";
 import react, { useState } from "react";
 
 const initialValue = {
   name: "",
   author: "",
-  publisher: "",
-  available: "",
+  publication: "",
+  copies: "",
 };
 
 const AddBook = () => {
   const [book, setbook] = useState(initialValue);
-  const { name, author, publisher, available } = book;
+  const { name, author, publication, copies } = book;
 
   const onValueChange = (e) => {
     setbook({ ...book, [e.target.name]: e.target.value });
@@ -17,6 +18,15 @@ const AddBook = () => {
 
   const addbookDetails = async () => {
     console.log(book);
+    axios
+      .post("http://localhost:5000/add-book", book)
+      .then((res) => {
+        console.log("Backend Response: ", res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
     setbook(initialValue);
   };
 
@@ -47,22 +57,22 @@ const AddBook = () => {
             />
           </div>
           <div>
-            <label className="block">Publisher</label>
+            <label className="block">Publication</label>
             <input
               className="px-4 py-2 rounded text-black"
               onChange={(e) => onValueChange(e)}
-              name="publisher"
-              value={publisher}
+              name="publication"
+              value={publication}
               id="my-input"
             />
           </div>
           <div>
-            <label className="block">Available</label>
+            <label className="block">Copies</label>
             <input
               className="px-4 py-2 rounded text-black"
               onChange={(e) => onValueChange(e)}
-              name="available"
-              value={available}
+              name="copies"
+              value={copies}
               id="my-input"
             />
           </div>

@@ -25,15 +25,20 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/add-user": [
+    "/all-book": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/add-user.js"
+      "static/chunks/pages/all-book.js"
     ],
     "/all-user": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/all-user.js"
+    ],
+    "/edit-user/[userid]": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/edit-user/[userid].js"
     ]
   },
   "ampFirstPages": []
