@@ -30,11 +30,6 @@
       "static/chunks/main.js",
       "static/chunks/pages/all-book.js"
     ],
-    "/all-user": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/all-user.js"
-    ],
     "/edit-user/[userid]": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
