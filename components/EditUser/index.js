@@ -9,13 +9,37 @@ const initialValue = {
   phone: "",
 };
 
+<<<<<<< HEAD
+=======
+
+
+export async function getServerSideProps(context) {
+  const { userid } = context.query;
+  console.log(context);
+  const response = await fetch(`http://localhost:5000/single-user/${userid}`);
+  const info = await response.json();
+  return {
+    props: {
+      info,
+    },
+  };
+}
+
+>>>>>>> 1e92010a427ef00705fa51af750b7a38a3b12ed8
 const UserEdit = ({ info }) => {
   console.log("Props: ", info);
   const [book, setBook] = useState(initialValue);
 
   useEffect(() => {
+<<<<<<< HEAD
     setBook(info);
   }, [info]);
+=======
+   setBook(info);
+ }, [info]);
+
+  console.log("Books: ", book);
+>>>>>>> 1e92010a427ef00705fa51af750b7a38a3b12ed8
 
   const { fullname, userName, email, phone } = book;
 
