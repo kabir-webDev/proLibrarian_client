@@ -12,10 +12,14 @@ const UserList = () => {
   }, []);
 
   const deleteUserData = async (id) => {
-    console.log(id);
-    const deleteUser = users.filter((user) => user._id != id);
-    setUsers(deleteUser);
-    // getAllUsers();
+    try {
+      let response = await axios.delete(
+        `http://localhost:5000/delete-user/${id}`
+      );
+      console.log(response);
+    } catch (err) {
+      console.log("Error: ", err);
+    }
   };
 
   const getAllUsers = async () => {
