@@ -2,19 +2,27 @@ import react, { useState, useEffect } from "react";
 import axios from "axios";
 import Link from "next/link";
 import ReactLoading from "react-loading";
+import { useRouter } from "next/router";
 
 const UserList = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     getAllBooks();
   }, []);
 
   const deleteBookData = async (id) => {
-    console.log(id);
-    const deleteBook = books.filter((book) => book._id != id);
-    setBooks(deleteBook);
+    try {
+      let response = await axios.delete(
+        `http://localhost:5000/delete-book/${id}`
+      );
+      console.log(response);
+      router.reload(window.location.pathname);
+    } catch (err) {
+      console.log("Error: ", err);
+    }
   };
 
   const getAllBooks = async () => {
@@ -77,7 +85,7 @@ const UserList = () => {
               </td>
               <td className="border-2">
                 <button className="px-4 py-2 bg-emerald-400 hover:text-rose-50 rounded">
-                  <Link href={`/edit-book/${book.id}`}>Edit Book</Link>
+                  <Link href={`/edit-book/${book._id}`}>Edit Book</Link>
                 </button>{" "}
                 <button
                   className="px-4 py-2 bg-rose-500 hover:text-rose-50 rounded"

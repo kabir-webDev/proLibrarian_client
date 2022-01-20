@@ -10,14 +10,15 @@ import {
 } from "@material-ui/core";
 import { useRouter } from "next/router";
 import axios from "axios";
+import Link from "next/link";
 // import { useHistory, useParams } from "react-router-dom";
 // import { getUsers, editUser } from "../Service/api";
 
 const initialValue = {
   name: "",
-  username: "",
-  email: "",
-  phone: "",
+  author: "",
+  publication: "",
+  copies: "",
 };
 
 const useStyles = makeStyles({
@@ -51,22 +52,23 @@ const EditBook = ({ info }) => {
 
   console.log("Books: ", book);
 
-  const { name, username, email, phone } = book;
+  const { name, author, publication, copies } = book;
 
   const onValueChange = (e) => {
     setBook({ ...book, [e.target.name]: e.target.value });
   };
 
   const editUserDetails = async () => {
-    // const response = await editUser(id, user);
-    // history.push("/all");
-    console.log("Book Edit List: ", book);
+    try {
+      let response = await axios.post(
+        `http://localhost:5000/edit-book/${info._id}`,
+        book
+      );
+      console.log("Response: ", response);
+    } catch (err) {
+      console.log(err);
+    }
   };
-
-  // const onValueChange = (e) => {
-  //   console.log(e.target.value);
-  //   setUser({ ...user, [e.target.name]: e.target.value });
-  // };
 
   return (
     <div className="bg-zinc-700 w-full text-red-50">
@@ -84,33 +86,33 @@ const EditBook = ({ info }) => {
             />
           </div>
           <div>
-            <label className="block">Username</label>
+            <label className="block">Author</label>
 
             <input
               className="px-4 py-2 rounded text-black"
               onChange={(e) => onValueChange(e)}
-              name="username"
-              value={username}
+              name="author"
+              value={author}
               id="my-input"
             />
           </div>
           <div>
-            <label className="block">Email</label>
+            <label className="block">Publication</label>
             <input
               className="px-4 py-2 rounded text-black"
               onChange={(e) => onValueChange(e)}
-              name="email"
-              value={email}
+              name="publication"
+              value={publication}
               id="my-input"
             />
           </div>
           <div>
-            <label className="block">Phone</label>
+            <label className="block">Copies</label>
             <input
               className="px-4 py-2 rounded text-black"
               onChange={(e) => onValueChange(e)}
-              name="phone"
-              value={phone}
+              name="copies"
+              value={copies}
               id="my-input"
             />
           </div>
@@ -119,7 +121,7 @@ const EditBook = ({ info }) => {
               className="bg-green-400 w-full py-2 rounded text-base  hover:bg-green-300 text-slate-800"
               onClick={() => editUserDetails()}
             >
-              Edit Book
+              <Link href="/all-book">Edit Book</Link>
             </button>
           </div>
         </div>
