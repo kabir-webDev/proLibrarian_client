@@ -1,4 +1,5 @@
 import axios from "axios";
+import Link from "next/link";
 import react, { useState } from "react";
 
 const initialValue = {
@@ -81,7 +82,7 @@ const AddBook = () => {
               className="bg-green-400 w-full py-2 rounded text-base  hover:bg-green-300 text-slate-800"
               onClick={() => addbookDetails()}
             >
-              Add Book
+              <Link href="/all-book">Add Book</Link>
             </button>
           </div>
         </div>

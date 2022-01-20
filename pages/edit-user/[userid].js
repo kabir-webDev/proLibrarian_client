@@ -16,7 +16,6 @@ export default EditBook;
 export async function getServerSideProps(context) {
   const { userid } = context.query;
   const response = await fetch(`http://localhost:5000/single-user/${userid}`);
-  // const response = await fetch(`https://jsonplaceholder.typicode.com/users/1`);
   const info = await response.json();
   return {
     props: {

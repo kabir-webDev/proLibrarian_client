@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
+import Link from "next/link";
 
 const initialValue = {
   fullname: "",
@@ -8,10 +9,6 @@ const initialValue = {
   email: "",
   phone: "",
 };
-
-<<<<<<< HEAD
-=======
-
 
 export async function getServerSideProps(context) {
   const { userid } = context.query;
@@ -25,38 +22,29 @@ export async function getServerSideProps(context) {
   };
 }
 
->>>>>>> 1e92010a427ef00705fa51af750b7a38a3b12ed8
 const UserEdit = ({ info }) => {
   console.log("Props: ", info);
-  const [book, setBook] = useState(initialValue);
+  const [user, setUser] = useState(initialValue);
 
   useEffect(() => {
-<<<<<<< HEAD
-    setBook(info);
+    setUser(info);
   }, [info]);
-=======
-   setBook(info);
- }, [info]);
 
-  console.log("Books: ", book);
->>>>>>> 1e92010a427ef00705fa51af750b7a38a3b12ed8
+  console.log("users: ", user);
 
-  const { fullname, userName, email, phone } = book;
+  const { fullname, userName, email, phone } = user;
 
   const onValueChange = (e) => {
-    setBook({ ...book, [e.target.name]: e.target.value });
+    setUser({ ...user, [e.target.name]: e.target.value });
   };
 
   const editUserDetails = async () => {
     try {
-      let response = await axios.put(
-        `http://localhost:5000/edit-user/${info._id}`
+      let response = await axios.post(
+        `http://localhost:5000/edit-user/${info._id}`,
+        user
       );
-      console.log(response);
-      // setUsers(response.data);
-      // const response = await editUser(id, user);
-      // history.push("/all");
-      console.log("Book Edit List: ", book);
+      console.log("Response: ", response);
     } catch (err) {
       console.log(err);
     }
@@ -64,7 +52,7 @@ const UserEdit = ({ info }) => {
 
   return (
     <div className="bg-zinc-700 w-full text-red-50">
-      <h2 className="text-center">Add Book</h2>
+      <h2 className="text-center">Add user</h2>
       <div className="flex flex-col items-center">
         <div>
           <div className="w-1/5">
@@ -113,7 +101,7 @@ const UserEdit = ({ info }) => {
               className="bg-green-400 w-full py-2 rounded text-base  hover:bg-green-300 text-slate-800"
               onClick={() => editUserDetails()}
             >
-              Edit User
+              <Link href="/all-user">Edit User</Link>
             </button>
           </div>
         </div>

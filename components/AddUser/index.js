@@ -1,5 +1,6 @@
 import react, { useState } from "react";
 import axios from "axios";
+import Link from "next/link";
 
 const initialValue = {
   fullname: "",
@@ -81,7 +82,7 @@ const AddUser = () => {
               className="bg-green-400 w-full py-2 rounded text-base  hover:bg-green-300 text-slate-800"
               onClick={() => addUserDetails()}
             >
-              Add User
+              <Link href="/all-user">Add User</Link>
             </button>
           </div>
         </div>

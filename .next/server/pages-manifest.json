@@ -2,5 +2,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/all-user": "pages/all-user.js"
+  "/all-book": "pages/all-book.js",
+  "/edit-book/[bookid]": "pages/edit-book/[bookid].js"
 }
