@@ -13,7 +13,7 @@ const Header = () => {
 
       <div className={css.container}>
         <Link href="/">
-          <div>Pro Librarian</div>
+          <div style={{ marginRight: "44%" }}>Pro Librarian</div>
         </Link>
         <Link href="/add-user">
           <div>Add User</div>

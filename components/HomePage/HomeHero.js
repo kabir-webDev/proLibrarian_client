@@ -13,11 +13,6 @@ const HomeHero = () => {
         <h1>Welcome to </h1>
         <span className="text-yellow-300">Pro Librarian Web Application</span>
       </h1>
-      <p className="text-center text-sm md:text-base">
-        We are looking forward to work on your project. You can email us or fill
-        in the form or directly reach out to our contact number, one of us will
-        connect with you.
-      </p>
     </div>
   );
 };

@@ -43,26 +43,26 @@ const UserList = () => {
       </div>
     </div>
   ) : (
-    <div className="w-full">
-      <div className="w-11/12 m-auto">
+    <div className="w-full flex justify-center items-center">
+      <div className="">
         <table>
           <tr className="text-xl text-teal-500">
             <th className="border-2 text-left">
               <div className="py-2 pr-6 pl-2">Id</div>
             </th>
-            <th className="text-left border-2 pl-2">
+            <th className="text-left border-2 pl-2 w-72">
               <div>Name</div>
             </th>
-            <th className="text-left border-2 pl-2">
+            <th className="text-left border-2 pl-2 w-52">
               <div>Author</div>
             </th>
-            <th className="text-left border-2 pl-2">
+            <th className="text-left border-2 pl-2 w-52">
               <div>Publication</div>
             </th>
-            <th className="text-left border-2 pl-2">
+            <th className="text-left border-2 pl-2 w-52">
               <div>Copies Left</div>
             </th>
-            <th className="text-center border-2 pl-2 text-rose-500">
+            <th className="text-center border-2 pl-2 text-rose-500 w-60">
               <div>Operation</div>
             </th>
           </tr>
@@ -71,24 +71,24 @@ const UserList = () => {
               <td className="border-2 pl-2">
                 <span className="text-xl">{index + 1}</span>
               </td>
-              <td className="border-2 pr-6 pl-2">
+              <td className="border-2 pl-2">
                 <span className="text-xl">{book.name}</span>
               </td>
-              <td className="border-2 pr-6 pl-2">
+              <td className="border-2 pl-2">
                 <span className="text-xl">{book.author}</span>
               </td>
-              <td className="border-2 pr-6 pl-2">
+              <td className="border-2 pl-2">
                 <span className="text-xl">{book.publication}</span>
               </td>
-              <td className="border-2 pr-6 pl-2">
+              <td className="border-2 pl-2">
                 <span className="text-xl">{book.copies}</span>
               </td>
-              <td className="border-2">
-                <button className="px-4 py-2 bg-emerald-400 hover:text-rose-50 rounded">
+              <td className="border-b-2 border-r-2  flex justify-around ">
+                <button className="px-3 py-[6px] bg-emerald-400 hover:text-rose-50 rounded">
                   <Link href={`/edit-book/${book._id}`}>Edit Book</Link>
                 </button>{" "}
                 <button
-                  className="px-4 py-2 bg-rose-500 hover:text-rose-50 rounded"
+                  className="px-3 py-[6px] bg-rose-500 hover:text-rose-50 rounded"
                   onClick={() => deleteBookData(book._id)}
                 >
                   Delete

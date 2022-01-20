@@ -45,23 +45,23 @@ const UserList = () => {
     </div>
   ) : (
     <div className="w-full flex justify-center items-center">
-      <div className=" w-[1200px] ">
+      <div className="  ">
         <table>
           <tbody>
             <tr className="text-xl text-teal-500">
               <th className="border-2 text-left">
                 <div className="py-2 pr-6 pl-2">Id</div>
               </th>
-              <th className="text-left border-2 pl-2">
+              <th className="text-left border-2  w-64">
                 <div>Name</div>
               </th>
-              <th className="text-left border-2 pl-2">
+              <th className="text-left border-2 pl-2 w-48">
                 <div>Username</div>
               </th>
-              <th className="text-left border-2 pl-2">
+              <th className="text-left border-2 pl-2 w-72">
                 <div>Email</div>
               </th>
-              <th className="text-left border-2 pl-2">
+              <th className="text-left border-2 pl-2 w-56">
                 <div>Phone</div>
               </th>
               <th className="text-center border-2 pl-2 text-rose-500">
@@ -73,27 +73,27 @@ const UserList = () => {
                 <td className="border-2 pl-2">
                   <span className="text-xl">{index + 1}</span>
                 </td>
-                <td className="border-2 pr-6 pl-2">
+                <td className="border-2 pl-2">
                   <span className="text-xl">{user.fullname}</span>
                 </td>
-                <td className="border-2 pr-6 pl-2">
+                <td className="border-2 pl-2">
                   <span className="text-xl">{user.userName}</span>
                 </td>
-                <td className="border-2 pr-6 pl-2">
+                <td className="border-2 pl-2">
                   <span className="text-xl">{user.email}</span>
                 </td>
-                <td className="border-2 pr-6 pl-2">
+                <td className="border-2 pl-2">
                   <span className="text-xl">{user.phone}</span>
                 </td>
-                <td className="border-2">
+                <td className="border-b-2 border-r-2  flex justify-around ">
                   <button
-                    className="px-4 py-2 bg-emerald-400 hover:text-rose-50 rounded"
+                    className="px-3 py-[6px] bg-emerald-400 hover:text-rose-50 rounded"
                     to={`/edit/${user._id}`}
                   >
                     <Link href={`/edit-user/${user._id}`}>Edit User</Link>
                   </button>{" "}
                   <button
-                    className="px-4 py-2 bg-rose-500 hover:text-rose-50 rounded"
+                    className="px-3 py-[6px] bg-rose-500 hover:text-rose-50 rounded"
                     onClick={() => deleteUserData(user._id)}
                   >
                     <Link href="/all-user">Delete</Link>
