@@ -1,7 +1,8 @@
 import react, { useState } from "react";
 import axios from "axios";
 import Link from "next/link";
-import UserDataService from "../Service/index";
+import UserDataService from "../UserService/index";
+import { useRouter } from "next/router";
 
 const initialValue = {
   fullname: "",
@@ -11,6 +12,7 @@ const initialValue = {
 };
 
 const AddUser = () => {
+  const router = useRouter();
   const [user, setUser] = useState(initialValue);
   const { fullname, userName, email, phone } = user;
 
@@ -28,25 +30,13 @@ const AddUser = () => {
       createdAt: new Date().toISOString(),
     };
     try {
-      // const response = await addDoc(collection(db, "user"), newUser);
       const response = await UserDataService.addUsers(newUser);
       console.log("Response: ", response);
+      router.push("/all-user");
       setUser(initialValue);
     } catch (err) {
       console.log(err);
     }
-
-    // console.log(user);
-    // axios
-    //   .post("http://localhost:5000/add-user", user)
-    //   .then((res) => {
-    //     console.log("Backend Response: ", res.data);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-
-    // setUser(initialValue);
   };
 
   return (

@@ -1,8 +1,7 @@
 // import UserList from "../../components/UserList";
 import UserList from "../../FireComponents/UserList";
 import Layout from "../../Layout";
-import { db } from "../../Util/database";
-import { getDocs, collection } from "firebase/firestore";
+import UserDataService from "../../FireComponents/UserService/index";
 
 const AllUser = ({ users }) => {
   return (
@@ -17,7 +16,7 @@ export default AllUser;
 
 export async function getServerSideProps(context) {
   try {
-    const data = await getDocs(collection(db, "user"));
+    const data = await UserDataService.getAllUsers();
     let users = [];
     data.forEach((doc) => {
       users.push({ ...doc.data(), id: doc.id });

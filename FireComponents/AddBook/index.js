@@ -1,6 +1,8 @@
 import axios from "axios";
 import Link from "next/link";
-import react, { useState } from "react";
+import { useState } from "react";
+import BookDataService from "../BookService/index";
+import { useRouter } from "next/router";
 
 const initialValue = {
   name: "",
@@ -10,6 +12,7 @@ const initialValue = {
 };
 
 const AddBook = () => {
+  const router = useRouter();
   const [book, setbook] = useState(initialValue);
   const { name, author, publication, copies } = book;
 
@@ -18,17 +21,22 @@ const AddBook = () => {
   };
 
   const addbookDetails = async () => {
-    console.log(book);
-    axios
-      .post("http://localhost:5000/add-book", book)
-      .then((res) => {
-        console.log("Backend Response: ", res.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-    setbook(initialValue);
+    console.log("Data: ", book);
+    const newBook = {
+      name: book.name,
+      author: book.author,
+      publication: book.publication,
+      copies: book.copies,
+      createdAt: new Date().toISOString(),
+    };
+    try {
+      const response = await BookDataService.addBooks(newBook);
+      console.log("Response: ", response);
+      router.push("/all-book");
+      setBook(initialValue);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (

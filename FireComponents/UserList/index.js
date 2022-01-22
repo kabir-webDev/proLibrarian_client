@@ -3,8 +3,8 @@ import axios from "axios";
 import Link from "next/link";
 import ReactLoading from "react-loading";
 import { useRouter } from "next/router";
-import UserDataService from "../Service/index";
-import { getDocs, collection } from "firebase/firestore";
+import UserDataService from "../UserService/index";
+import { getDocs, collection, deleteDoc } from "firebase/firestore";
 import { db } from "../../Util/database";
 
 const UserList = ({ user }) => {
@@ -12,22 +12,25 @@ const UserList = ({ user }) => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  // useEffect(() => {
-  //   setUsers(user);
-  // }, [user]);
+  useEffect(() => {
+    setUsers(user);
+  }, [user]);
 
-  console.log("UserListBitch: ", users);
+  console.log("UserList: ", users);
 
   const deleteUserData = async (id) => {
-    try {
-      let response = await axios.delete(
-        `http://localhost:5000/delete-user/${id}`
-      );
-      console.log(response);
-      router.reload(window.location.pathname);
-    } catch (err) {
-      console.log("Error: ", err);
-    }
+    // try {
+    //   let response = await axios.delete(
+    //     `http://localhost:5000/delete-user/${id}`
+    //   );
+    //   console.log(response);
+    //   router.reload(window.location.pathname);
+    // } catch (err) {
+    //   console.log("Error: ", err);
+    // }
+    await UserDataService.deleteUser(id);
+
+    router.reload(window.location.pathname);
   };
 
   const getAllUser = () => {
@@ -101,11 +104,11 @@ const UserList = ({ user }) => {
                     className="px-3 py-[6px] bg-emerald-400 hover:text-rose-50 rounded"
                     to={`/edit/${user._id}`}
                   >
-                    <Link href={`/edit-user/${user._id}`}>Edit User</Link>
+                    <Link href={`/edit-user/${user.id}`}>Edit User</Link>
                   </button>{" "}
                   <button
                     className="px-3 py-[6px] bg-rose-500 hover:text-rose-50 rounded"
-                    onClick={() => deleteUserData(user._id)}
+                    onClick={() => deleteUserData(user.id)}
                   >
                     <Link href="/all-user">Delete</Link>
                   </button>{" "}

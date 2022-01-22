@@ -4,14 +4,14 @@ import Link from "next/link";
 import ReactLoading from "react-loading";
 import { useRouter } from "next/router";
 
-const BookList = () => {
-  const [books, setBooks] = useState([]);
+const BookList = ({ book }) => {
+  const [books, setBooks] = useState(book);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
-    getAllBooks();
-  }, []);
+    // getAllBooks();
+  }, [book]);
 
   const deleteBookData = async (id) => {
     try {
@@ -29,7 +29,6 @@ const BookList = () => {
     setLoading(true);
     try {
       let response = await axios.get("http://localhost:5000/all-book");
-      setBooks(response.data);
       setLoading(false);
     } catch (err) {
       console.log("Error: ", err);

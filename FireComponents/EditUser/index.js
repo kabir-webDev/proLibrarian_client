@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
-import axios from "axios";
+import UserDataService from "../UserService/index";
+
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const initialValue = {
   fullname: "",
@@ -10,25 +11,10 @@ const initialValue = {
   phone: "",
 };
 
-export async function getServerSideProps(context) {
-  const { userid } = context.query;
-  console.log(context);
-  const response = await fetch(`http://localhost:5000/single-user/${userid}`);
-  const info = await response.json();
-  return {
-    props: {
-      info,
-    },
-  };
-}
-
-const UserEdit = ({ info }) => {
-  console.log("Props: ", info);
-  const [user, setUser] = useState(initialValue);
-
-  useEffect(() => {
-    setUser(info);
-  }, [info]);
+const UserEdit = ({ users, userid }) => {
+  const router = useRouter();
+  console.log("Props: ", users);
+  const [user, setUser] = useState(users);
 
   console.log("users: ", user);
 
@@ -40,11 +26,8 @@ const UserEdit = ({ info }) => {
 
   const editUserDetails = async () => {
     try {
-      let response = await axios.post(
-        `http://localhost:5000/edit-user/${info._id}`,
-        user
-      );
-      console.log("Response: ", response);
+      await UserDataService.updateUser(userid, user);
+      router.push("/all-user");
     } catch (err) {
       console.log(err);
     }
@@ -101,7 +84,7 @@ const UserEdit = ({ info }) => {
               className="bg-green-400 w-full py-2 rounded text-base  hover:bg-green-300 text-slate-800"
               onClick={() => editUserDetails()}
             >
-              <Link href="/all-user">Edit User</Link>
+              Edit User
             </button>
           </div>
         </div>

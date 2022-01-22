@@ -1,4 +1,5 @@
-import AddBook from "../../components/AddBook";
+// import AddBook from "../../components/AddBook";
+import AddBook from "../../FireComponents/AddBook";
 import Layout from "../../Layout";
 
 const BookAdd = () => {
