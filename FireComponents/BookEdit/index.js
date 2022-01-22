@@ -1,18 +1,7 @@
 import { useState, useEffect } from "react";
-import {
-  FormGroup,
-  FormControl,
-  InputLabel,
-  Input,
-  Button,
-  makeStyles,
-  Typography,
-} from "@material-ui/core";
 import { useRouter } from "next/router";
-import axios from "axios";
 import Link from "next/link";
-// import { useHistory, useParams } from "react-router-dom";
-// import { getUsers, editUser } from "../Service/api";
+import BookDataService from "../BookService/index";
 
 const initialValue = {
   name: "",
@@ -21,34 +10,10 @@ const initialValue = {
   copies: "",
 };
 
-const useStyles = makeStyles({
-  container: {
-    width: "50%",
-    margin: "5% 0 0 25%",
-    "& > *": {
-      marginTop: 20,
-    },
-  },
-});
-
-export async function getServerSideProps() {
-  const response = await fetch("http://jsonplaceholder.typicode.com/users/8");
-  const data = await response.json();
-  return {
-    props: {
-      data,
-    },
-  };
-}
-
-const EditBook = ({ info }) => {
+const EditBook = ({ books, bookid }) => {
   const router = useRouter();
-  const query = router.query;
-  const classes = useStyles();
-  const [book, setBook] = useState(initialValue);
-  useEffect(() => {
-    setBook(info);
-  }, [info]);
+  const [book, setBook] = useState(books);
+  useEffect(() => {}, [book]);
 
   console.log("Books: ", book);
 
@@ -60,11 +25,8 @@ const EditBook = ({ info }) => {
 
   const editUserDetails = async () => {
     try {
-      let response = await axios.post(
-        `http://localhost:5000/edit-book/${info._id}`,
-        book
-      );
-      console.log("Response: ", response);
+      await BookDataService.updateBook(bookid, book);
+      router.push("/all-book");
     } catch (err) {
       console.log(err);
     }

@@ -3,6 +3,7 @@ import axios from "axios";
 import Link from "next/link";
 import ReactLoading from "react-loading";
 import { useRouter } from "next/router";
+import BookDataService from "../BookService/index";
 
 const BookList = ({ book }) => {
   const [books, setBooks] = useState(book);
@@ -14,15 +15,9 @@ const BookList = ({ book }) => {
   }, [book]);
 
   const deleteBookData = async (id) => {
-    try {
-      let response = await axios.delete(
-        `http://localhost:5000/delete-book/${id}`
-      );
-      console.log(response);
-      router.reload(window.location.pathname);
-    } catch (err) {
-      console.log("Error: ", err);
-    }
+    await BookDataService.deleteBook(id);
+
+    router.reload(window.location.pathname);
   };
 
   const getAllBooks = async () => {
@@ -84,11 +79,11 @@ const BookList = ({ book }) => {
               </td>
               <td className="border-b-2 border-r-2  flex justify-around ">
                 <button className="px-3 py-[6px] bg-emerald-400 hover:text-rose-50 rounded">
-                  <Link href={`/edit-book/${book._id}`}>Edit Book</Link>
+                  <Link href={`/edit-book/${book.id}`}>Edit Book</Link>
                 </button>{" "}
                 <button
                   className="px-3 py-[6px] bg-rose-500 hover:text-rose-50 rounded"
-                  onClick={() => deleteBookData(book._id)}
+                  onClick={() => deleteBookData(book.id)}
                 >
                   Delete
                 </button>{" "}

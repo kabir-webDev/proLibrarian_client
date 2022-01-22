@@ -1,0 +1,1 @@
+{"c":["webpack"],"r":["pages/edit-book/[bookid]"],"m":["./FireComponents/BookEdit/index.js","./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fedit-book%2F%5Bbookid%5D&absolutePagePath=%2Fmedia%2Fkabir%2FSoftwere%2FMy%20Learning%2FFullStack_Challenge%2Fclient%2Fpages%2Fedit-book%2F%5Bbookid%5D.js!","./pages/edit-book/[bookid].js"]}
