@@ -30,15 +30,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/add-user.js"
     ],
-    "/all-book": [
+    "/all-user": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/all-book.js"
-    ],
-    "/edit-book/[bookid]": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/edit-book/[bookid].js"
+      "static/chunks/pages/all-user.js"
     ]
   },
   "ampFirstPages": []
